@@ -1,6 +1,25 @@
 import Filters from '@/components/Filters'
+import ResourceCard from '@/components/ResourceCard'
 import SearchForm from '@/components/SearchForm'
-const Home = () => {
+import Header from '@/components/Header'
+import { getResources } from '@/sanity/actions'
+
+interface Props {
+    searchParams : { [ key : string ] :string | undefined }
+}
+
+export const revalidate = 900
+
+const Home = async ({ searchParams } : Props) => {
+    console.log({searchParams});
+    
+    const resources = await getResources({
+        query : '',
+        category : searchParams?.categary ||  '',
+        page : '1'
+    })
+    
+    
     return (
         <main className='flex justify-center items-center sm:p-16 xs:p-8 px-6 py-12 w-full max-w-screen-2xl flex-col'>
             <section className='w-full pt-[98px]'>
@@ -10,6 +29,29 @@ const Home = () => {
                 <SearchForm />
             </section>
             <Filters />
+            
+            <section className='flex items-center flex-col justify-center w-full mt-6 max-sm:flex-col sm:mt-20'>
+                <Header />
+                <div className='mt-12 flex flex-wrap gap-16 w-full justify-center lg:justify-start'>
+                    {resources.length > 0 ? (
+                        resources.map((resource :any) => (
+                            <ResourceCard
+                                title={resource.title}
+                                key={resource._id}
+                                image={resource.image}
+                                id={resource._id}
+                                downloadNumber={resource.views}
+                                />
+                        ))
+                    ) : (
+                    <p
+                    className='text[#A3B3BC] text-[16px] font-normal leading-[20.8px]'>
+                        No resources found
+                    </p>)
+                    }
+                </div>
+            </section>
+            
         </main>
     )
 }
