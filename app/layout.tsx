@@ -1,5 +1,7 @@
+import Nav from '@/components/Nav'
 import './globals.css'
 import type { Metadata } from 'next'
+import Footer from '@/components/Footer'
 
 
 export const metadata: Metadata = {
@@ -14,8 +16,10 @@ export default function RootLayout({ children } : { children: React.ReactNode })
         {/* <head> */}
             {/* <link rel="icon" href="/images/favicon.ico" /> */}
         {/* </head> */}
-        <body className='min-h-screen bg-black-[#0D1117] font-poppins'>
+        <body className='min-h-screen bg-[#0D1117] font-poppins'>
+            <Nav />
             {children}
+            <Footer />
         </body>
         </html>
     )
