@@ -5,26 +5,9 @@ import { useState } from 'react'
 
 const links = ['all', 'Next 13', 'Frontend', 'backend', 'fullstack']
 
-// const [searchTodos,setSearchTodos] = useSearchParams({q:""})
-// const query = searchTodos.get("q")
-// const handleSearch = (e) => {
-//     const prevTodos = todos
-//     setSearchTodos(prev => {
-//         prev.set("q", e.target.value)
-//         return prev
-//     },{ replace: true })
-//     const todoFiltered = todos.filter(todo => {
-//         return (
-//             todo.name.toLowerCase().includes(query.toLowerCase())
-//         )
-//     })
-//     setTodos(todoFiltered)
-// }
-
 const Filters = () => {
     const [active, setactive] = useState<string>('')
     const searchParams = useSearchParams()
-    // const query = searchParams.get("category")
     
     
     const router = useRouter()
@@ -36,7 +19,7 @@ const Filters = () => {
             newUrl = formUrlQuery({ 
                 params : searchParams.toString() , 
                 key :  'category', 
-                value : null 
+                value : null
             })
         }else {
             setactive(link)

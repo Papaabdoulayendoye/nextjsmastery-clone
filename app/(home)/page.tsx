@@ -5,13 +5,12 @@ import Header from '@/components/Header'
 import { getResources } from '@/sanity/actions'
 
 interface Props {
-    searchParams : { [ key : string ] :string | undefined }
+    searchParams : {[key:string]:string | undefined}
 }
 
 export const revalidate = 900
 
 const Home = async ({ searchParams } : Props) => {
-    console.log({searchParams});
     
     const resources = await getResources({
         query : '',
